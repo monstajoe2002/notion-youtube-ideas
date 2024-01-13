@@ -68,6 +68,14 @@ export type Block = {
       plain_text: string;
     }>;
   };
+  numbered_list_item?: {
+    rich_text: Array<{
+      text: {
+        content: string;
+      };
+      plain_text: string;
+    }>;
+  };
   to_do?: {
     rich_text: Array<{
       text: {
@@ -76,5 +84,6 @@ export type Block = {
     }>;
     checked: boolean;
   };
+
   next_cursor: string;
 };

@@ -28,11 +28,18 @@ export default function Page() {
             {block.heading_2?.rich_text[0]?.plain_text}
           </h2>
           <p>{block.paragraph?.rich_text[0]?.plain_text}</p>
-          <ul className="list-disc">
+          <ul className="list-disc list-inside">
             {block.bulleted_list_item?.rich_text.map((item, i) => (
               <li key={i}>{item.plain_text}</li>
             ))}
           </ul>
+          {/* TODO: fix list numbering issue */}
+          <ol className="list-decimal list-inside">
+            {block.numbered_list_item?.rich_text.map((item, i) => (
+              <li key={i}>{item.plain_text}</li>
+            ))}
+          </ol>
+
           {block.to_do?.rich_text.map((task, i) => (
             <div key={i} className="flex items-center my-2">
               <Checkbox checked={block.to_do?.checked} id={`${i}`} />
