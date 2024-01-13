@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Checkbox } from "components/ui/checkbox";
+import { Label } from "components/ui/label";
 import { retrieveNotionBlocksByPageId, retrieveNotionPageById } from "data";
 import invariant from "tiny-invariant";
 
@@ -33,20 +34,15 @@ export default function Page() {
             ))}
           </ul>
           {block.to_do?.rich_text.map((task, i) => (
-            <>
-              <Checkbox
-                className="border border-white mr-2"
-                key={i}
-                id={`${i}`}
-              />
-              <label
-                key={i}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            <div key={i} className="flex items-center my-2">
+              <Checkbox checked={block.to_do?.checked} id={`${i}`} />
+              <Label
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2"
                 htmlFor={`${i}`}
               >
                 {task.text.content}
-              </label>
-            </>
+              </Label>
+            </div>
           ))}
         </div>
       ))}

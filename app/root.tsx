@@ -36,7 +36,7 @@ export default function App() {
       </head>
       <body>
         <main
-          className={`flex justify-center h-screen w-screen bg-primary text-primary-foreground transition-opacity ${
+          className={`flex justify-center h-screen max-w-screen-lg container transition-opacity ${
             state === "loading" ? "opacity-70" : ""
           }`}
         >

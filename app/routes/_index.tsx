@@ -14,7 +14,6 @@ export default function Index() {
         <div key={id}>
           <Link
             className={buttonVariants({
-              className: "text-primary-foreground",
               variant: "link",
             })}
             to={`/page/${id}`}
