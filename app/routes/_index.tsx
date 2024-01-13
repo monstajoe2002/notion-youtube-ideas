@@ -1,41 +1,36 @@
-import type { MetaFunction } from "@remix-run/node";
+import { Link, json, useLoaderData } from "@remix-run/react";
+import { buttonVariants } from "components/ui/button";
+import { retrieveNotionPages } from "data";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+export const loader = async () => {
+  const pages = await retrieveNotionPages();
+  return json({ pages });
 };
-
 export default function Index() {
+  const { pages } = useLoaderData<typeof loader>();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
+    <div>
+      {pages.map(({ id, properties: { Name, Flag, Tags } }) => (
+        <div key={id}>
+          <Link
+            className={buttonVariants({
+              className: "text-primary-foreground",
+              variant: "link",
+            })}
+            to={`/page/${id}`}
           >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+            {Name.title[0].text.content}
+          </Link>
+          <p>
+            Status: <code>{Flag.status.name}</code>
+          </p>
+          <p>
+            {Tags.multi_select.map((tag) => (
+              <span key={tag.id}>{tag.name}, </span>
+            ))}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
