@@ -27,3 +27,10 @@ export const retrieveNotionBlocksByPageId = async (pageId: string) => {
   const res = blocks.results as unknown as Block[];
   return res;
 };
+export const editNotionPage = async (pageId: string, props: Partial<Block>) => {
+  const res = await notion.blocks.update({
+    block_id: pageId,
+    ...props,
+  });
+  return res;
+};
