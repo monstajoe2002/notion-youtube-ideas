@@ -42,7 +42,7 @@ export default function Page() {
 
           {block.to_do?.rich_text.map((task, i) => (
             <div key={i} className="flex items-center my-2">
-              <Checkbox checked={block.to_do?.checked} id={`${i}`} />
+              <Checkbox defaultChecked={block.to_do?.checked} id={`${i}`} />
               <Label
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2"
                 htmlFor={`${i}`}
