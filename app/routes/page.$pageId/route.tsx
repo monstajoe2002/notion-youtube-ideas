@@ -16,19 +16,19 @@ export default function Page() {
   const { blocks, pageInfo } = useLoaderData<typeof loader>();
   return (
     <div>
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center my-6">
+      <h1 className="scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl my-6">
         {pageInfo.properties.Name.title[0].text.content}
       </h1>
       {blocks.map((block) => (
         <div key={block.id}>
-          <h1 className="scroll-m-20 text-3xl font-bold tracking-tight lg:text-4xl">
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {block.heading_1?.rich_text[0]?.plain_text}
           </h1>
           <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight transition-colors">
             {block.heading_2?.rich_text[0]?.plain_text}
           </h2>
           <p>{block.paragraph?.rich_text[0]?.plain_text}</p>
-          <ul className="list-disc list-inside">
+          <ul className="list-disc [&>li]:mt-2 my-6 ml-6">
             {block.bulleted_list_item?.rich_text.map((item, i) => (
               <li key={i}>{item.plain_text}</li>
             ))}
