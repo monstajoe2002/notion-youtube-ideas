@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Checkbox } from "components/ui/checkbox";
 import { Label } from "components/ui/label";
@@ -11,8 +11,14 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const pageInfo = await retrieveNotionPageById(params.pageId);
   return json({ blocks, pageInfo });
 }
-
-export default function Page() {
+export const meta: MetaFunction<typeof loader> = ({ matches, data }) => {
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
+  return [
+    { title: data?.pageInfo.properties.Name.title[0].text.content },
+    ...parentMeta,
+  ];
+};
+export default function NotionPage() {
   const { blocks, pageInfo } = useLoaderData<typeof loader>();
   return (
     <div>
