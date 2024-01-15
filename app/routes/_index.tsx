@@ -23,11 +23,12 @@ export default function Index() {
           <p>
             Status: <code>{Flag.status.name}</code>
           </p>
-          <p>
-            {Tags.multi_select.map((tag) => (
-              <span key={tag.id}>{tag.name}, </span>
-            ))}
-          </p>
+          {Tags.multi_select.length ? (
+            <p>
+              Tags:{" "}
+              <span>{Tags.multi_select.map((tag) => tag.name).join(", ")}</span>
+            </p>
+          ) : null}
         </div>
       ))}
     </div>
