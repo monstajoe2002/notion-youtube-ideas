@@ -1,4 +1,5 @@
 import { Link, json, useLoaderData } from "@remix-run/react";
+import { Badge } from "components/ui/badge";
 import { buttonVariants } from "components/ui/button";
 import { retrieveNotionPages } from "data";
 
@@ -24,10 +25,20 @@ export default function Index() {
             Status: <code>{Flag.status.name}</code>
           </p>
           {Tags.multi_select.length ? (
-            <p>
+            <div className="my-4">
               Tags:{" "}
-              <span>{Tags.multi_select.map((tag) => tag.name).join(", ")}</span>
-            </p>
+              {Tags.multi_select.map((tag) => (
+                <Badge
+                  key={tag.id}
+                  variant="outline"
+                  style={{
+                    borderColor: tag.color,
+                  }}
+                >
+                  {tag.name}
+                </Badge>
+              ))}
+            </div>
           ) : null}
         </div>
       ))}

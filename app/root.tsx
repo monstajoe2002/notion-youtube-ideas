@@ -36,7 +36,7 @@ export default function App() {
       </head>
       <body>
         <main
-          className={`flex h-screen max-w-screen-lg container transition-opacity ${
+          className={`flex max-w-screen-lg container transition-opacity ${
             state === "loading" ? "opacity-70" : ""
           }`}
         >
