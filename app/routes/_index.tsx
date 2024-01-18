@@ -10,7 +10,7 @@ export const loader = async () => {
 export default function Index() {
   const { pages } = useLoaderData<typeof loader>();
   return (
-    <div>
+    <div className="flex flex-col">
       {pages.map(({ id, properties: { Name, Flag, Tags } }) => (
         <div key={id}>
           <Link
